@@ -1,0 +1,2253 @@
+[
+    {
+        "id": "01ba8f577a2030ad",
+        "type": "tab",
+        "label": "PBC_atual",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "b2fb260e70136ff9",
+        "type": "udp in",
+        "z": "01ba8f577a2030ad",
+        "name": "",
+        "iface": "",
+        "port": "32000",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 1900,
+        "y": 1020,
+        "wires": [
+            [
+                "6f72414e639b8dea"
+            ]
+        ]
+    },
+    {
+        "id": "519cd8acca0cce22",
+        "type": "udp out",
+        "z": "01ba8f577a2030ad",
+        "name": "",
+        "addr": "",
+        "iface": "",
+        "port": "30000",
+        "ipv": "udp4",
+        "outport": "30000",
+        "base64": false,
+        "multicast": "false",
+        "x": 3110,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "a7e6060154a7fd12",
+        "type": "udp in",
+        "z": "01ba8f577a2030ad",
+        "name": "",
+        "iface": "",
+        "port": "32001",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 1900,
+        "y": 980,
+        "wires": [
+            [
+                "02a10df9aeaad057"
+            ]
+        ]
+    },
+    {
+        "id": "3b3bf0240baf329c",
+        "type": "udp out",
+        "z": "01ba8f577a2030ad",
+        "name": "",
+        "addr": "",
+        "iface": "",
+        "port": "30001",
+        "ipv": "udp4",
+        "outport": "30001",
+        "base64": false,
+        "multicast": "false",
+        "x": 3110,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "a08ae947673a5387",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "RX - DER B",
+        "func": "//Ler dados recebidos e alocar no buffer\nvar buf = Buffer.from(msg.payload);\n\n//Ler variáveis recebidas\nflow.set('PgB', buf.readFloatLE(0));\nflow.set('QgB', buf.readFloatLE(4));\nflow.set('PmaxoB', buf.readFloatLE(8));\nflow.set('QmaxoB', buf.readFloatLE(12));\nflow.set('ipB', msg.ip);\n\n",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2330,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "8cc313ae7664f25e",
+        "type": "udp in",
+        "z": "01ba8f577a2030ad",
+        "name": "",
+        "iface": "",
+        "port": "32002",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 1900,
+        "y": 940,
+        "wires": [
+            [
+                "32d72166a92a339c"
+            ]
+        ]
+    },
+    {
+        "id": "40f0538e07bfdede",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "RX - DER C",
+        "func": "//Ler dados recebidos e alocar no buffer\nvar buf = Buffer.from(msg.payload);\n\n//Ler variáveis recebidas\nflow.set('PgC', buf.readFloatLE(0));\nflow.set('QgC', buf.readFloatLE(4));\nflow.set('PmaxoC', buf.readFloatLE(8));\nflow.set('QmaxoC', buf.readFloatLE(12));\nflow.set('ipC', msg.ip);\n\n",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2330,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "eee25407dff9ddd9",
+        "type": "udp out",
+        "z": "01ba8f577a2030ad",
+        "name": "",
+        "addr": "",
+        "iface": "",
+        "port": "30002",
+        "ipv": "udp4",
+        "outport": "30002",
+        "base64": false,
+        "multicast": "false",
+        "x": 3110,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "bea053b7eae0933e",
+        "type": "udp in",
+        "z": "01ba8f577a2030ad",
+        "name": "",
+        "iface": "",
+        "port": "32003",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 1900,
+        "y": 880,
+        "wires": [
+            [
+                "37b4963dafcae46a"
+            ]
+        ]
+    },
+    {
+        "id": "37b4963dafcae46a",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "PCC",
+        "func": "var start_time = flow.get('start_time') || 0;\n\n//Ler dados recebidos e alocar no buffer\nvar buf = Buffer.from(msg.payload);\n\n//Ler variáveis recebidas\nflow.set('PgridA', buf.readFloatLE(0));\nflow.set('PgridB', buf.readFloatLE(4));\nflow.set('PgridC', buf.readFloatLE(8));\nflow.set('QgridA', buf.readFloatLE(12));\nflow.set('QgridB', buf.readFloatLE(16));\nflow.set('QgridC', buf.readFloatLE(20));\nflow.set('Pref', buf.readFloatLE(24));\nflow.set('Qref', buf.readFloatLE(28));\nflow.set('medeclock2', buf.readFloatLE(32));\nflow.set('ipSCADA', msg.ip);\n\nvar medeclock2 = flow.get('medeclock2') || 0;\nvar medeclock_aux = flow.get('medeclock_aux') || 0;\n\nvar instante = (new Date().getTime() / 1000) - start_time;\n\nif(medeclock2 > medeclock_aux){\n    var lat_PCC = (instante - medeclock2)*1000;\n    flow.set('instanteS', instante);\n    flow.set('medeclock_SCADA', medeclock2);\n    flow.set('lat_PCC', lat_PCC);\n}\nflow.set('medeclock_aux', medeclock2);\n\n",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2030,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "4c3a14e06474cb04",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "Lcom",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2190,
+        "y": 940,
+        "wires": [
+            [
+                "40f0538e07bfdede"
+            ]
+        ]
+    },
+    {
+        "id": "bb030aa63d37e039",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "Lcom",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2190,
+        "y": 980,
+        "wires": [
+            [
+                "a08ae947673a5387"
+            ]
+        ]
+    },
+    {
+        "id": "6be8b54e4cf46232",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "Lcom",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2190,
+        "y": 1020,
+        "wires": [
+            [
+                "7c8c3317a547e5a9"
+            ]
+        ]
+    },
+    {
+        "id": "821e133de396b40e",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "Lcom",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2970,
+        "y": 1320,
+        "wires": [
+            [
+                "eee25407dff9ddd9"
+            ]
+        ]
+    },
+    {
+        "id": "83ebdff5da578ccb",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "Lcom",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2970,
+        "y": 1280,
+        "wires": [
+            [
+                "3b3bf0240baf329c"
+            ]
+        ]
+    },
+    {
+        "id": "a2315b1c413141d6",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "Lcom",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2970,
+        "y": 1240,
+        "wires": [
+            [
+                "519cd8acca0cce22"
+            ]
+        ]
+    },
+    {
+        "id": "7c8c3317a547e5a9",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "RX - DER A",
+        "func": "//Calcula o instante de chegada do pacote (C11)\nvar start_time = flow.get('start_time') || 0;\nvar C11 = (new Date().getTime() / 1000) - start_time;\nflow.set('instanteA', C11);\n\n//Ler dados recebidos e alocar no buffer\nvar buf = Buffer.from(msg.payload);\n\nflow.set('PgA', buf.readFloatLE(0));\nflow.set('QgA', buf.readFloatLE(4));\nflow.set('PmaxoA', buf.readFloatLE(8));\nflow.set('QmaxoA', buf.readFloatLE(12));\nflow.set('medeclock', buf.readFloatLE(16));\nflow.set('medeclock_DER', buf.readFloatLE(20));\nflow.set('ipA', msg.ip);\n\nvar PgridA = flow.get('PgridA') || 0;\nvar PgridB = flow.get('PgridB') || 0;\nvar PgridC = flow.get('PgridC') || 0;\nvar Prefout = flow.get('Prefout') || 0;\n\nvar QgridA = flow.get('QgridA') || 0;\nvar QgridB = flow.get('QgridB') || 0;\nvar QgridC = flow.get('QgridC') || 0;\nvar Qrefout = flow.get('Qrefout') || 0;\n\nvar PlA = flow.get('PlA') || 0;\nvar PlB = flow.get('PlB') || 0;\nvar PlC = flow.get('PlC') || 0;\n\nvar QlA = flow.get('QlA') || 0;\nvar QlB = flow.get('QlB') || 0;\nvar QlC = flow.get('QlC') || 0;\n\nvar PgA = flow.get('PgA') || 0;\nvar PgA1 = flow.get('PgA1') || 0;\n\nvar media = flow.get('media') || 0;\n\nvar arq1x = flow.get('arq1x') || 0;\nvar E11 = flow.get('medeclock') || 0;\n\nvar setfcF = flow.get('setfcF') || 0;\n\nvar medeclock_aux1 = flow.get('medeclock_aux1') || 0;\n\nvar lat_set_fcc = flow.get('lat_set_fcc') || 0;\n\nif (E11 > medeclock_aux1) {\n    // calcula L11\n    var L11 = ((C11 - E11)*1000-7);\n    flow.set('lat_set_fcc', L11);\n    flow.set('lat_atual', 1);\n}\nelse{\n    newMsg1 = null;\n}\nflow.set('medeclock_aux1', E11);\n\n//Cria mensagem para armazenar em arquivo\nvar info1 = C11 + ',' + E11 + ',' + PgridA + ',' + PgridB + ',' + PgridC + ',' + Prefout + ',' + QgridA + ',' + QgridB + ',' + QgridC + ',' + Qrefout + ',' + PlA + ',' + PlB + ',' + PlC + ',' + QlA + ',' + QlB + ',' + QlC + ',' + media + ',' + setfcF + ',' + lat_set_fcc;\nvar newMsg1 = { payload: info1, filename: arq1x };\n\n//return newMsg1;\nreturn null;\n\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2330,
+        "y": 1020,
+        "wires": [
+            [
+                "7cc2493d3d324490"
+            ]
+        ]
+    },
+    {
+        "id": "73585aa38a00113b",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 1",
+        "func": "var cont_delay1_i1 = flow.get('cont_delay1_i1') || 0;\nvar valor_delay1_i1 = 0;\n\n/*\nswitch (cont_delay1_i1) {\n    case 1:\n        valor_delay1_i1 = 0;\n      //  flow.set('Prefset', 2000);\n       \n        break;\n    case 2:\n        valor_delay1_i1 = 0;\n      //  flow.set('Prefset', 1000);\n\n        break;\n    case 3:\n        valor_delay1_i1 = 0;\n      //  flow.set('Prefset', 2000);\n\n        break;\n    case 4:\n        valor_delay1_i1 = 0;\n      //  flow.set('Prefset', 1000);\n\n        break;\n    case 5:\n        valor_delay1_i1 = 0;\n     //   flow.set('Prefset', 2000);\n\n        break;\n    case 6:\n        valor_delay1_i1 = 0;\n     //   flow.set('Prefset', 1000);\n\n        break;\n    case 7:\n        valor_delay1_i1 = 0;\n     //   flow.set('Prefset', 2000);\n\n        break;\n    case 8:\n        valor_delay1_i1 = 0;\n     //   flow.set('Prefset', 1000);\n\n        break;\n    case 9:\n        valor_delay1_i1 = 0;\n     //   flow.set('Prefset', 2000);\n\n        break;\n    default:\n        valor_delay1_i1 = 0;\n     //   flow.set('Prefset', 1000);\n}\n*/\n\n//valor_delay1_i1 = 0;\n\n\nswitch (cont_delay1_i1) {\n    case 0:\n        valor_delay1_i1 = 48;\n        break;\n    case 1:\n        valor_delay1_i1 = 200;\n        break;\n    case 2:\n        valor_delay1_i1 = 48;\n        break;\n    case 3:\n        valor_delay1_i1 = 48;\n        break;\n    case 4:\n        valor_delay1_i1 = 300;\n        break;\n    case 5:\n        valor_delay1_i1 = 48;\n        break\n}\n\n//valor_delay = 0;\ncont_delay1_i1 = cont_delay1_i1 + 1;\n\n\nflow.set('cont_delay1_i1', cont_delay1_i1);\nflow.set('delay1_i1', valor_delay1_i1);\n\n\nmsg.payload = valor_delay1_i1;\nreturn msg;\n",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2780,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "32d72166a92a339c",
+        "type": "change",
+        "z": "01ba8f577a2030ad",
+        "name": "define delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "delay2_i1",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2050,
+        "y": 940,
+        "wires": [
+            [
+                "4c3a14e06474cb04"
+            ]
+        ]
+    },
+    {
+        "id": "02a10df9aeaad057",
+        "type": "change",
+        "z": "01ba8f577a2030ad",
+        "name": "define delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "delay2_i1",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2050,
+        "y": 980,
+        "wires": [
+            [
+                "bb030aa63d37e039"
+            ]
+        ]
+    },
+    {
+        "id": "3df4fe99a4df1380",
+        "type": "change",
+        "z": "01ba8f577a2030ad",
+        "name": "define delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "delay1_i1",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2830,
+        "y": 1240,
+        "wires": [
+            [
+                "a2315b1c413141d6"
+            ]
+        ]
+    },
+    {
+        "id": "01eba8f6c5d19306",
+        "type": "change",
+        "z": "01ba8f577a2030ad",
+        "name": "define delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "delay1_i1",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2830,
+        "y": 1280,
+        "wires": [
+            [
+                "83ebdff5da578ccb"
+            ]
+        ]
+    },
+    {
+        "id": "bbb4158885e815fe",
+        "type": "change",
+        "z": "01ba8f577a2030ad",
+        "name": "define delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "delay1_i1",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2830,
+        "y": 1320,
+        "wires": [
+            [
+                "821e133de396b40e"
+            ]
+        ]
+    },
+    {
+        "id": "43fa2999f2a3484b",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "cada 5ms",
+        "props": [],
+        "repeat": "0.005",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 2710,
+        "y": 1060,
+        "wires": [
+            [
+                "bee0959f6e498a7c"
+            ]
+        ]
+    },
+    {
+        "id": "228c5cb0c083192d",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "1us",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.000001",
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 1910,
+        "y": 680,
+        "wires": [
+            [
+                "2c8e2bdd36cacafe"
+            ]
+        ]
+    },
+    {
+        "id": "2c8e2bdd36cacafe",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "initialize parameters",
+        "func": "var arq = '/home/pi5/PgPref_fcc10Hz';\nvar arq1 = '/home/pi5/calc_delay3';\nvar arq2 = '/home/pi5/Tservice';\nvar arq3 = '/home/pi5/calc_delay_scada';\nvar arq1x = '/home/pi5/calc_delay3x';\nvar arq1xA1 = '/home/pi5/calc_delay3xA1';\nvar arqteste = '/home/pi5/teste_buffer';\n\nvar erroA = 100;\nvar erroB = 100;\nvar erroC = 100;\n\nvar erroAq = 150;\nvar erroBq = 150;\nvar erroCq = 150;\n\nvar cont_erroA = 0;\nvar cont_erroB = 0;\nvar cont_erroC = 0;\n\nvar cont_erroAq = 0;\nvar cont_erroBq = 0;\nvar cont_erroCq = 0;\n\nvar lat_atual = 0;\nvar lat_atualA1 = 0;\n\nvar start_delay1_i1 = 48;\nvar start_delay1_i2 = 48;\nvar start_delay2_i1 = 48;\nvar start_delay2_i2 = 48;\n\nvar startPrefset = 2000;\nvar startQrefset = 0;\n\nvar setfcF = 4;\n\nvar intervalo = 1000;\n\nvar start_time = new Date().getTime()/1000;\n\nvar newMsgdelay1_i1 = {payload: start_delay1_i1};\nvar newMsgdelay1_i2 = {payload: start_delay1_i2};\nvar newMsgdelay2_i1 = {payload: start_delay2_i1};\nvar newMsgdelay2_i2 = {payload: start_delay2_i2};\n\nlet alphaAaa = [0, 0];\nlet alphaBaa = [0, 0];\nlet alphaCaa = [0, 0];\n\nlet alphaAaaa = [0, 0, 0];\nlet alphaBaaa = [0, 0, 0];\nlet alphaCaaa = [0, 0, 0];\n\nlet alphaAaaaa = [0, 0, 0, 0];\nlet alphaBaaaa = [0, 0, 0, 0];\nlet alphaCaaaa = [0, 0, 0, 0];\n\nlet betaAaa = [0, 0];\nlet betaBaa = [0, 0];\nlet betaCaa = [0, 0];\n\nlet betaAaaa = [0, 0, 0];\nlet betaBaaa = [0, 0, 0];\nlet betaCaaa = [0, 0, 0];\n\nlet betaAaaaa = [0, 0, 0, 0];\nlet betaBaaaa = [0, 0, 0, 0];\nlet betaCaaaa = [0, 0, 0, 0];\n\nlet alphaAouta = [0, 0];\nlet alphaBouta = [0, 0];\nlet alphaCouta = [0, 0];\n\nlet alphaAoutaa = [0, 0, 0];\nlet alphaBoutaa = [0, 0, 0];\nlet alphaCoutaa = [0, 0, 0];\n\nlet alphaAoutaaa = [0, 0, 0, 0];\nlet alphaBoutaaa = [0, 0, 0, 0];\nlet alphaCoutaaa = [0, 0, 0, 0];\n\nlet betaAouta = [0, 0];\nlet betaBouta = [0, 0];\nlet betaCouta = [0, 0];\n\nlet betaAoutaa = [0, 0, 0];\nlet betaBoutaa = [0, 0, 0];\nlet betaCoutaa = [0, 0, 0];\n\nlet betaAoutaaa = [0, 0, 0, 0];\nlet betaBoutaaa = [0, 0, 0, 0];\nlet betaCoutaaa = [0, 0, 0, 0];\n\nlet txcc = 1;\nlet txij = 1;\n\nflow.set('envia_A', 1);\nflow.set('envia_A1', 1);\n\nflow.set('envia_B', 1);\nflow.set('envia_B1', 1);\n\nflow.set('envia_C', 1);\nflow.set('envia_C1', 1);\n\nflow.set('ipA', null);\nflow.set('ipB', null);\nflow.set('ipC', null);\nflow.set('ipSCADA', null);\n\nflow.set('alphaAout', null);\nflow.set('alphaBout', null);\nflow.set('alphaCout', null);\n\nflow.set('betaAout', null);\nflow.set('betaBout', null);\nflow.set('betaCout', null);\n\nflow.set('alphaAa', null);\nflow.set('alphaBa', null);\nflow.set('alphaCa', null);\n\nflow.set('betaAa', null);\nflow.set('betaBa', null);\nflow.set('betaCa', null);\n\nflow.set('arq', arq);\nflow.set('arq1', arq1);\nflow.set('arq2', arq2);\nflow.set('arq3', arq3);\nflow.set('arq1x', arq1x);\nflow.set('arq1xA1', arq1xA1);\nflow.set('arqteste', arqteste);\n\nflow.set('contx', 0);\n\nflow.set('contteste', 0);\n\nflow.set('cont_Hz', 0);\nflow.set('atualiza', 0);\n\nflow.set('cont_in_faa', 1);\nflow.set('cont_out_faa', 1);\n\nflow.set('cont_in_faaa', 1);\nflow.set('cont_out_faaa', 1);\n\nflow.set('cont_in_faaaa', 1);\nflow.set('cont_out_faaaa', 1);\n\nflow.set('alphaAouta', alphaAouta);\nflow.set('alphaBouta', alphaBouta);\nflow.set('alphaCouta', alphaCouta);\n\nflow.set('alphaAoutaa', alphaAoutaa);\nflow.set('alphaBoutaa', alphaBoutaa);\nflow.set('alphaCoutaa', alphaCoutaa);\n\nflow.set('alphaAoutaaa', alphaAoutaaa);\nflow.set('alphaBoutaaa', alphaBoutaaa);\nflow.set('alphaCoutaaa', alphaCoutaaa);\n\nflow.set('betaAouta', betaAouta);\nflow.set('betaBouta', betaBouta);\nflow.set('betaCouta', betaCouta);\n\nflow.set('betaAoutaa', betaAoutaa);\nflow.set('betaBoutaa', betaBoutaa);\nflow.set('betaCoutaa', betaCoutaa);\n\nflow.set('betaAoutaaa', betaAoutaaa);\nflow.set('betaBoutaaa', betaBoutaaa);\nflow.set('betaCoutaaa', betaCoutaaa);\n\nflow.set('alphaAaa', alphaAaa);\nflow.set('alphaBaa', alphaBaa);\nflow.set('alphaCaa', alphaCaa);\n\nflow.set('alphaAaaa', alphaAaaa);\nflow.set('alphaBaaa', alphaBaaa);\nflow.set('alphaCaaa', alphaCaaa);\n\nflow.set('alphaAaaaa', alphaAaaaa);\nflow.set('alphaBaaaa', alphaBaaaa);\nflow.set('alphaCaaaa', alphaCaaaa);\n\nflow.set('betaAaa', betaAaa);\nflow.set('betaBaa', betaBaa);\nflow.set('betaCaa', betaCaa);\n\nflow.set('betaAaaa', betaAaaa);\nflow.set('betaBaaa', betaBaaa);\nflow.set('betaCaaa', betaCaaa);\n\nflow.set('betaAaaaa', betaAaaaa);\nflow.set('betaBaaaa', betaBaaaa);\nflow.set('betaCaaaa', betaCaaaa);\n\nflow.set('delay1_i1', newMsgdelay1_i1.payload);\nflow.set('cont_delay1_i1', 1);\n\nflow.set('delay1_i2', newMsgdelay1_i2.payload);\nflow.set('cont_delay1_i2', 1);\n\nflow.set('delay2_i1', newMsgdelay2_i1.payload);\nflow.set('cont_delay2_i1', 1);\n\nflow.set('delay2_i2', newMsgdelay2_i2.payload);\nflow.set('cont_delay2_i2', 1);\n\nflow.set('Prefout', 0);\n\nflow.set('Qrefout', 0);\n\nflow.set('E1', 0);\nflow.set('E2', 0);\n\nflow.set('start_time', start_time);\n\nflow.set('Prefset', startPrefset);\nflow.set('Qrefset', startQrefset);\n\nflow.set('meu_intervalo_dinamico', intervalo);\n\nflow.set('setfcF', setfcF);\n\nflow.set('erroA', erroA);\nflow.set('erroB', erroB);\nflow.set('erroC', erroC);\n\nflow.set('erroAq', erroAq);\nflow.set('erroBq', erroBq);\nflow.set('erroCq', erroCq);\n\nflow.set('cont_erroA', cont_erroA);\nflow.set('cont_erroB', cont_erroB);\nflow.set('cont_erroC', cont_erroC);\n\nflow.set('cont_erroAq', cont_erroAq);\nflow.set('cont_erroBq', cont_erroBq);\nflow.set('cont_erroCq', cont_erroCq);\n\nflow.set('lat_atual', lat_atual);\nflow.set('lat_atualA1', lat_atualA1);\n\nflow.set('txcc', txcc);\nflow.set('txij', txij);\n\nvar info = 'in_faa1Hz,out_faa1Hz';\nvar info1 = 'Time,ClockSCADA0,PgridA,PgridB,PgridC,PgridSP';\nvar info1x = 'Time,ClockSCADA0,PgridA,PgridB,PgridC,PgridSP,med,freq,lat';\nvar info2x = 'Time,ClockSCADA0,PgridA,PgridB,PgridC,PgridSP,QgridA,QgridB,QgridC,QgridSP,PlA,PlB,PlC,QlA,QlB,QlC,med,freq,lat';\nvar info2 = 'Ts_PCC';\nvar info3 = 'Time,ClockSCADA0';\nvar info4 = 'Time,comprimento';\nvar newMsg = {payload: info, filename: arq};\nvar newMsg1 = {payload: info1, filename: arq1};\nvar newMsg2 = {payload: info2, filename: arq2};\nvar newMsg3 = {payload: info3, filename: arq3};\nvar newMsg4 = { payload: info2x, filename: arq1x};\nvar newMsg5 = { payload: info2x, filename: arq1xA1};\nvar newMsg6 = { payload: info4, filename: arqteste};\nnewMsg2 = null;\nnewMsg3 = null;\nreturn [newMsg, newMsg1, newMsg2, newMsg3, newMsg4, newMsg5, newMsg6];\n",
+        "outputs": 7,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2080,
+        "y": 680,
+        "wires": [
+            [
+                "1913d8d33a9f067f"
+            ],
+            [
+                "9201bb0efc7459ef"
+            ],
+            [
+                "373df1db2ad736ab"
+            ],
+            [
+                "74658b4a2df2b622"
+            ],
+            [
+                "da0af65af2185282"
+            ],
+            [
+                "88eea9ed125c10ab"
+            ],
+            [
+                "2c4e00aa81b914d4"
+            ]
+        ]
+    },
+    {
+        "id": "1913d8d33a9f067f",
+        "type": "file",
+        "z": "01ba8f577a2030ad",
+        "name": "PgPreg",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 2340,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b5d55c86c16ebd73",
+        "type": "udp in",
+        "z": "01ba8f577a2030ad",
+        "name": "",
+        "iface": "",
+        "port": "32004",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 1900,
+        "y": 1180,
+        "wires": [
+            [
+                "589717c6152e0ca5"
+            ]
+        ]
+    },
+    {
+        "id": "89a7bb4afb0ae136",
+        "type": "udp in",
+        "z": "01ba8f577a2030ad",
+        "name": "",
+        "iface": "",
+        "port": "32005",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 1900,
+        "y": 1140,
+        "wires": [
+            [
+                "6cce923516a0a5a9"
+            ]
+        ]
+    },
+    {
+        "id": "00adee59b02fe9b5",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "RX - DER B1",
+        "func": "//Ler dados recebidos e alocar no buffer\nvar buf = Buffer.from(msg.payload);\n\n//Ler variáveis recebidas\nflow.set('PgB1', buf.readFloatLE(0));\nflow.set('QgB1', buf.readFloatLE(4));\nflow.set('PmaxoB1', buf.readFloatLE(8));\nflow.set('QmaxoB1', buf.readFloatLE(12));\nflow.set('ipB1', msg.ip);\n\n",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2330,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "d39272ee00a8677e",
+        "type": "udp in",
+        "z": "01ba8f577a2030ad",
+        "name": "",
+        "iface": "",
+        "port": "32006",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "buffer",
+        "x": 1900,
+        "y": 1100,
+        "wires": [
+            [
+                "d2abadad22c9a112"
+            ]
+        ]
+    },
+    {
+        "id": "e895cb726057f84e",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "RX - DER A1",
+        "func": "/////////////////////////////////////\n//Calcula o instante de chegada do pacote (C12)\nvar start_time = flow.get('start_time') || 0;\nvar C12 = (new Date().getTime() / 1000) - start_time;\nflow.set('instanteA1', C12);\n\n//Ler dados recebidos e alocar no buffer\nvar buf = Buffer.from(msg.payload);\n\nflow.set('PgA1', buf.readFloatLE(0));\nflow.set('QgA1', buf.readFloatLE(4));\nflow.set('PmaxoA1', buf.readFloatLE(8));\nflow.set('QmaxoA1', buf.readFloatLE(12));\nflow.set('medeclockA1', buf.readFloatLE(16));\nflow.set('ipA1', msg.ip);\n\n//Inicializa variáveis\nvar PgridA = flow.get('PgridA') || 0;\nvar PgridB = flow.get('PgridB') || 0;\nvar PgridC = flow.get('PgridC') || 0;\nvar Prefout = flow.get('Prefout') || 0;\n\nvar QgridA = flow.get('QgridA') || 0;\nvar QgridB = flow.get('QgridB') || 0;\nvar QgridC = flow.get('QgridC') || 0;\nvar Qrefout = flow.get('Qrefout') || 0;\n\nvar PlA = flow.get('PlA') || 0;\nvar PlB = flow.get('PlB') || 0;\nvar PlC = flow.get('PlC') || 0;\n\nvar QlA = flow.get('QlA') || 0;\nvar QlB = flow.get('QlB') || 0;\nvar QlC = flow.get('QlC') || 0;\n\nvar PgA = flow.get('PgA') || 0;\nvar PgA1 = flow.get('PgA1') || 0;\n\nvar mediaA1 = flow.get('mediaA1') || 0;\n\nvar setfcF = flow.get('setfcF') || 0;\n\nvar arq1xA1 = flow.get('arq1xA1') || 0;\nvar E12 = flow.get('medeclockA1') || 0;\n\nvar medeclockA1_aux1 = flow.get('medeclockA1_aux1') || 0;\n\nvar lat_set_fcc_A1 = flow.get('lat_set_fcc_A1') || 0;\n\n// Testa se o pacote recebido possui um E12 atualizado\nif (E12 > medeclockA1_aux1) {\n    // calcula L12\n    var L12 = ((C12 - E12)*1000-7);\n    flow.set('lat_set_fcc_A1', L12);\n    flow.set('lat_atualA1', 1);\n}\nelse{\n    newMsg1A1 = null;\n}\nflow.set('medeclockA1_aux1', E12);\n\nvar info1A1 = C12 + ',' + E12 + ',' + PgridA + ',' + PgridB + ',' + PgridC + ',' + Prefout + ',' + QgridA + ',' + QgridB + ',' + QgridC + ',' + Qrefout + ',' + PlA + ',' + PlB + ',' + PlC + ',' + QlA + ',' + QlB + ',' + QlC + ',' + mediaA1 + ',' + setfcF + ',' + lat_set_fcc_A1;\nvar newMsg1A1 = { payload: info1A1, filename: arq1xA1 };\n\n//return newMsg1A1;\nreturn null;\n\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2330,
+        "y": 1180,
+        "wires": [
+            [
+                "2c8bbbd35b2be6d8"
+            ]
+        ]
+    },
+    {
+        "id": "d2abadad22c9a112",
+        "type": "change",
+        "z": "01ba8f577a2030ad",
+        "name": "define delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "delay2_i2",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2050,
+        "y": 1100,
+        "wires": [
+            [
+                "29cb683ac25d6f62"
+            ]
+        ]
+    },
+    {
+        "id": "6cce923516a0a5a9",
+        "type": "change",
+        "z": "01ba8f577a2030ad",
+        "name": "define delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "delay2_i2",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2050,
+        "y": 1140,
+        "wires": [
+            [
+                "0e0f96e5e7c5862f"
+            ]
+        ]
+    },
+    {
+        "id": "fc66550fe2481a6e",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "set_Lcom1_i1",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "14400",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "105",
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 2620,
+        "y": 640,
+        "wires": [
+            [
+                "73585aa38a00113b"
+            ]
+        ]
+    },
+    {
+        "id": "bee0959f6e498a7c",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "PBC e anti-alising",
+        "func": "//Inicialização das variáveis\nvar PgridA = (flow.get('PgridA') !== undefined) ? flow.get('PgridA') : 1;\nvar PgridB = (flow.get('PgridB') !== undefined) ? flow.get('PgridB') : 1;\nvar PgridC = (flow.get('PgridC') !== undefined) ? flow.get('PgridC') : 1;\nvar PmaxoA = (flow.get('PmaxoA') !== undefined) ? flow.get('PmaxoA') : 10000;\nvar PmaxoB = (flow.get('PmaxoB') !== undefined) ? flow.get('PmaxoB') : 10000;\nvar PmaxoC = (flow.get('PmaxoC') !== undefined) ? flow.get('PmaxoC') : 10000;\nvar PgA = (flow.get('PgA') !== undefined) ? flow.get('PgA') : 1;\nvar PgB = (flow.get('PgB') !== undefined) ? flow.get('PgB') : 1;\nvar PgC = (flow.get('PgC') !== undefined) ? flow.get('PgC') : 1;\n\nvar QgridA = (flow.get('QgridA') !== undefined) ? flow.get('QgridA') : 1;\nvar QgridB = (flow.get('QgridB') !== undefined) ? flow.get('QgridB') : 1;\nvar QgridC = (flow.get('QgridC') !== undefined) ? flow.get('QgridC') : 1;\nvar QmaxoA = (flow.get('QmaxoA') !== undefined) ? flow.get('QmaxoA') : 1;\nvar QmaxoB = (flow.get('QmaxoB') !== undefined) ? flow.get('QmaxoB') : 1;\nvar QmaxoC = (flow.get('QmaxoC') !== undefined) ? flow.get('QmaxoC') : 1;\nvar QgA = (flow.get('QgA') !== undefined) ? flow.get('QgA') : 1;\nvar QgB = (flow.get('QgB') !== undefined) ? flow.get('QgB') : 1;\nvar QgC = (flow.get('QgC') !== undefined) ? flow.get('QgC') : 1;\n\nvar PmaxoA1 = (flow.get('PmaxoA1') !== undefined) ? flow.get('PmaxoA1') : 10000;\nvar PmaxoB1 = (flow.get('PmaxoB1') !== undefined) ? flow.get('PmaxoB1') : 10000;\nvar PmaxoC1 = (flow.get('PmaxoC1') !== undefined) ? flow.get('PmaxoC1') : 10000;\nvar PgA1 = (flow.get('PgA1') !== undefined) ? flow.get('PgA1') : 1;\nvar PgB1 = (flow.get('PgB1') !== undefined) ? flow.get('PgB1') : 1;\nvar PgC1 = (flow.get('PgC1') !== undefined) ? flow.get('PgC1') : 1;\n\nvar QmaxoA1 = (flow.get('QmaxoA1') !== undefined) ? flow.get('QmaxoA1') : 1;\nvar QmaxoB1 = (flow.get('QmaxoB1') !== undefined) ? flow.get('QmaxoB1') : 1;\nvar QmaxoC1 = (flow.get('QmaxoC1') !== undefined) ? flow.get('QmaxoC1') : 1;\nvar QgA1 = (flow.get('QgA1') !== undefined) ? flow.get('QgA1') : 1;\nvar QgB1 = (flow.get('QgB1') !== undefined) ? flow.get('QgB1') : 1;\nvar QgC1 = (flow.get('QgC1') !== undefined) ? flow.get('QgC1') : 1;\n\nvar start_time = flow.get('start_time') || 0;\n\nvar ipA = flow.get('ipA')||0;\nvar ipB = flow.get('ipB')||0;\nvar ipC = flow.get('ipC')||0;\nvar ipSCADA = flow.get('ipSCADA')||0;\n\nvar alphaAout = flow.get('alphaAout')||0;\nvar alphaBout = flow.get('alphaBout')||0;\nvar alphaCout = flow.get('alphaCout')||0;\n\nvar betaAout = flow.get('betaAout')||0;\nvar betaBout = flow.get('betaBout')||0;\nvar betaCout = flow.get('betaCout')||0;\n\nvar alphaAa = flow.get('alphaAa') || 0;\nvar alphaBa = flow.get('alphaBa') || 0;\nvar alphaCa = flow.get('alphaCa') || 0;\n\nvar betaAa = flow.get('betaAa') || 0;\nvar betaBa = flow.get('betaBa') || 0;\nvar betaCa = flow.get('betaCa') || 0;\n\nvar contx = flow.get('contx') || 0;\n\nvar arq = flow.get('arq') || 0;\n\nvar cont_in_faa = flow.get('cont_in_faa') || 0;\nvar cont_out_faa = flow.get('cont_out_faa') || 0;\n\nvar cont_in_faaa = flow.get('cont_in_faaa') || 0;\nvar cont_out_faaa = flow.get('cont_out_faaa') || 0;\n\nvar cont_in_faaaa = flow.get('cont_in_faaaa') || 0;\nvar cont_out_faaaa = flow.get('cont_out_faaaa') || 0;\n\nvar lat_set_fcc = flow.get('lat_set_fcc') || 0;\nvar lat_set_fcc_A1 = flow.get('lat_set_fcc_A1') || 0;\n\nvar media = flow.get('media') || 0;\nvar mediaA1 = flow.get('mediaA1') || 0;\n\nvar delay2_i1 = flow.get('delay2_i1') || 0;\n\nlet alphaAouta = flow.get('alphaAouta') || 0;\nlet alphaBouta = flow.get('alphaBouta') || 0;\nlet alphaCouta = flow.get('alphaCouta') || 0;\n\nlet alphaAoutaa = flow.get('alphaAoutaa') || 0;\nlet alphaBoutaa = flow.get('alphaBoutaa') || 0;\nlet alphaCoutaa = flow.get('alphaCoutaa') || 0;\n\nlet alphaAoutaaa = flow.get('alphaAoutaaa') || 0;\nlet alphaBoutaaa = flow.get('alphaBoutaaa') || 0;\nlet alphaCoutaaa = flow.get('alphaCoutaaa') || 0;\n\nlet betaAouta = flow.get('betaAouta') || 0;\nvar betaBouta = flow.get('betaBouta') || 0;\nlet betaCouta = flow.get('betaCouta') || 0;\n\nlet betaAoutaa = flow.get('betaAoutaa') || 0;\nvar betaBoutaa = flow.get('betaBoutaa') || 0;\nlet betaCoutaa = flow.get('betaCoutaa') || 0;\n\nlet betaAoutaaa = flow.get('betaAoutaaa') || 0;\nvar betaBoutaaa = flow.get('betaBoutaaa') || 0;\nlet betaCoutaaa = flow.get('betaCoutaaa') || 0;\n\nlet alphaAaa = flow.get('alphaAaa') || 0;\nlet alphaBaa = flow.get('alphaBaa') || 0;\nlet alphaCaa = flow.get('alphaCaa') || 0;\n\nlet alphaAaaa = flow.get('alphaAaaa') || 0;\nlet alphaBaaa = flow.get('alphaBaaa') || 0;\nlet alphaCaaa = flow.get('alphaCaaa') || 0;\n\nlet alphaAaaaa = flow.get('alphaAaaaa') || 0;\nlet alphaBaaaa = flow.get('alphaBaaaa') || 0;\nlet alphaCaaaa = flow.get('alphaCaaaa') || 0;\n\nlet betaAaa = flow.get('betaAaa') || 0;\nlet betaBaa = flow.get('betaBaa') || 0;\nlet betaCaa = flow.get('betaCaa') || 0;\n\nlet betaAaaa = flow.get('betaAaaa') || 0;\nlet betaBaaa = flow.get('betaBaaa') || 0;\nlet betaCaaa = flow.get('betaCaaa') || 0;\n\nlet betaAaaaa = flow.get('betaAaaaa') || 0;\nlet betaBaaaa = flow.get('betaBaaaa') || 0;\nlet betaCaaaa = flow.get('betaCaaaa') || 0;\n\nlet contteste = flow.get('contteste') || 0;\n\nlet sec = 0;\n\nlet setfcF = 0;\n\nlet lat_aux = 0;\n\nlet hist = 5;\n\nlet flagh = 0;\nlet flagh1 = 0;\nlet flagh2 = 0;\nlet flagh3 = 0;\nlet flagh4 = 0;\n\nlet cont_erroA = flow.get('cont_erroA') || 0;\nlet cont_erroB = flow.get('cont_erroB') || 0;\nlet cont_erroC = flow.get('cont_erroC') || 0;\n\nlet cont_erroAq = flow.get('cont_erroAq') || 0;\nlet cont_erroBq = flow.get('cont_erroBq') || 0;\nlet cont_erroCq = flow.get('cont_erroCq') || 0;\n\nvar txcc = flow.get('txcc') || 0;\nvar txij = flow.get('txij') || 0;\n\nlet maquina = 1;\n\n//Criação de referência para validações das funções de transferência\n//Gera ref inicio\nvar cont_Hz = flow.get('cont_Hz') || 0;\nvar start_time = flow.get('start_time') || 0;\n\nvar cont_seno = flow.get('cont_seno') || 0;\n\nvar freq = cont_Hz;\nvar Fsamp = 200;\nvar amp = 0;\nvar amp1 = 0;\nvar amp2 = 0;\n\nlet freqv = [0.1, 0.3, 0.5, 0.7, 0.85, 0.9, 1.1, 1.2, 0]; // fcF = 1 Hz\n//let freqv = [0.4, 0.8, 1.2, 1.6, 2, 0]; // fcF = 2 Hz\n//let freqv = [0.35, 1, 2, 2.7, 3, 3.2, 3.64, 4.8, 0]; // fcF = 4 Hz\n//let freqv = [1, 2, 3, 4, 5, 0]; // fcF = 5 Hz\n//let freqv = [1, 2.5, 5, 7.5, 10, 0]; // fcF = 10 Hz\n//let freqv = [1, 5, 10, 15, 20, 0]; // fcF = 20 Hz\n//let freqv = [1, 7.5, 15, 22.5, 30, 0]; // fcF = 30 Hz\n//let freqv = [1, 15, 30, 45, 60, 0]; // fcF = 60 Hz\n\nlet tamanho = freqv.length;\n\nvar Prefset = flow.get('Prefset') || 0;\nvar Qrefset = flow.get('Qrefset') || 0;\n\nvar Pref = Prefset\nvar Qref = Qrefset;\n\nif (cont_Hz === tamanho - 1) {\n    amp = 0;\n    amp1 = 0;\n    amp2 = 0;\n}\n\nflow.set('tamanho', tamanho);\n\nvar currentTime = cont_seno / Fsamp;\n\ncont_seno = cont_seno + 1;\n\nflow.set('cont_seno', cont_seno);\n\nvar Prefout = Pref + amp * Math.sin(2 * Math.PI * (freqv[cont_Hz]) * currentTime);\nvar Qrefout = Qref + amp * Math.sin(2 * Math.PI * (freqv[cont_Hz]) * currentTime);\n\nvar E1 = amp1 * Math.sin(2 * Math.PI * (freqv[cont_Hz]) * currentTime);\nvar E2 = amp2 * Math.sin(2 * Math.PI * (freqv[cont_Hz]) * currentTime);\n//Gera ref fim\n\nvar PgA1cont = PgA1 + E2;\n\n//Algoritmo PBC - potência ativa\nvar PlA = PgridA + (PgA + PgA1cont);\nvar PlB = PgridB + (PgB + PgB1);\nvar PlC = PgridC + (PgC + PgC1);\n\nvar PbatA = PlA - (Prefout);\nvar PbatB = PlB - (Prefout);\nvar PbatC = PlC - (Prefout);\n\nif (PbatA > (PmaxoA + PmaxoA1)) {\n    PbatA = (PmaxoA + PmaxoA1);\n}\nelse if (PbatA < (-1 * (PmaxoA + PmaxoA1))) {\n    PbatA = (-1 * (PmaxoA + PmaxoA1));\n}\n\nif (PbatB > (PmaxoB + PmaxoB1)) {\n    PbatB = (PmaxoB + PmaxoB1);\n}\nelse if (PbatB < (-1 * (PmaxoB + PmaxoB1))) {\n    PbatB = (-1 * (PmaxoB + PmaxoB1));\n}\n\nif (PbatC > (PmaxoC + PmaxoC1)) {\n    PbatC = (PmaxoC + PmaxoC1);\n}\nelse if (PbatC < (-1 * (PmaxoC + PmaxoC1))) {\n    PbatC = (-1 * (PmaxoC + PmaxoC1));\n}\n\nif (cont_in_faa > 2) {\n    cont_in_faa = 1;\n}\n\nif (cont_out_faa > 2) {\n    cont_out_faa = 1;\n}\n\nif (cont_in_faaa > 3) {\n    cont_in_faaa = 1;\n}\n\nif (cont_out_faaa > 3) {\n    cont_out_faaa = 1;\n}\n\nif (cont_in_faaaa > 4) {\n    cont_in_faaaa = 1;\n}\n\nif (cont_out_faaaa > 4) {\n    cont_out_faaaa = 1;\n}\n\nif (PmaxoA == 0 && PmaxoA1 == 0) {\n    var alphaA = 0;\n}\nelse {\n    var alphaA = PbatA / (PmaxoA + PmaxoA1);\n}\nif (PmaxoB == 0 && PmaxoB1 == 0) {\n    var alphaB = 0;\n}\nelse {\n    var alphaB = PbatB / (PmaxoB + PmaxoB1);\n}\nif (PmaxoC == 0 && PmaxoC1 == 0) {\n    var alphaC = 0;\n}\nelse {\n    var alphaC = PbatC / (PmaxoC + PmaxoC1);\n}\n\n//Estágio event-triggered\nlet erroA = PgridA - Prefout;\nlet erroB = PgridB - Prefout;\nlet erroC = PgridC - Prefout;\n\nlet erroAq = QgridA - Qrefout;\nlet erroBq = QgridB - Qrefout;\nlet erroCq = QgridC - Qrefout;\n\nif (Math.abs(erroA) < 100){\n    cont_erroA = cont_erroA + 1;\n}\nelse{\n    cont_erroA = 0;\n}\n\nif (Math.abs(erroB) < 100){\n    cont_erroB = cont_erroB + 1;\n}\nelse{\n    cont_erroB = 0;\n}\n\nif (Math.abs(erroC) < 100){\n    cont_erroC = cont_erroC + 1;\n}\nelse{\n    cont_erroC = 0;\n}\n\nif (Math.abs(erroAq) < 150){\n    cont_erroAq = cont_erroAq + 1;\n}\nelse{\n    cont_erroAq = 0;\n}\n\nif (Math.abs(erroBq) < 150){\n    cont_erroBq = cont_erroBq + 1;\n}\nelse{\n    cont_erroBq = 0;\n}\n\nif (Math.abs(erroCq) < 150){\n    cont_erroCq = cont_erroCq + 1;\n}\nelse{\n    cont_erroCq = 0;\n}\n\nflow.set('cont_erroA', cont_erroA);\nflow.set('cont_erroB', cont_erroB);\nflow.set('cont_erroC', cont_erroC);\n\nflow.set('erroA', erroA);\nflow.set('erroB', erroB);\nflow.set('erroC', erroC);\n\nflow.set('cont_erroAq', cont_erroAq);\nflow.set('cont_erroBq', cont_erroBq);\nflow.set('cont_erroCq', cont_erroCq);\n\nflow.set('erroAq', erroAq);\nflow.set('erroBq', erroBq);\nflow.set('erroCq', erroCq);\n\n//Descomenta para habilitar o estágio event-triggered\n//if ((cont_erroA > 2000) && (cont_erroB > 2000) && (cont_erroC > 2000) && (cont_erroAq > 2000) && (cont_erroBq > 2000) && (cont_erroCq > 2000)) {\n//    setfcF = 0;\n\n//    txij = 0;\n\n//    flow.set('txcc', txcc);\n//    flow.set('txij', txij);\n//}\n//else {\n\n//Descomenta para desligar o controle secundário\n    //txcc = 0;\n    //txij = 0;\n\n    flow.set('txcc', txcc);\n    flow.set('txij', txij);\n\n    // Inicializa variável de frequência de corte atual\n    let fc_novo;\n\n        if (PmaxoA == 0 && PmaxoA1 == 0) {\n            lat_aux = 300;\n            fc_novo = 0;\n        }\n        if (PmaxoA == 0 && PmaxoA1 != 0) {\n            lat_aux = mediaA1/2;\n        }\n        if (PmaxoA != 0 && PmaxoA1 == 0) {\n            lat_aux = media/2;\n        }\n        if (PmaxoA != 0 && PmaxoA1 != 0) {\n            if (media > mediaA1){\n                lat_aux = media/2;\n            }\n            else{\n                lat_aux = mediaA1/2;\n            }\n        }\n\n//Estágio adaptativo\n        if (lat_aux < 23){\n            fc_novo = 20;\n        }\n        else{\n            if (lat_aux < 30){\n                fc_novo = 10;\n            } \n            else{\n                if (lat_aux < 44) {\n                    fc_novo = 4;\n                } \n                else{\n                    if (lat_aux < 75) {\n                        fc_novo = 2;\n                    } \n                    else{\n                        if (lat_aux < 274) {\n                            fc_novo = 1;\n                        } \n                        else{\n                            fc_novo = 0;\n                        }\n\n                    }\n\n                }\n            }\n        }\n\n        //descomenta para a abordagem fixa\n        fc_novo = 10;\n\n        if (fc_novo === 20) {//fc = 20 Hz e TxCC = 20 ms;\n            //coeficientes do filtro Butterworth de quarta ordem com fc = 20 Hz e fs = 200 Hz\n            var a0 = 0.004824343357716;\n            var a1 = 0.019297373430865;\n            var a2 = 0.028946060146297;\n            var a3 = 0.019297373430865;\n            var a4 = 0.004824343357716;\n            var b1 = 2.369513007182036;\n            var b2 = -2.313988414415877;\n            var b3 = 1.054665405878565;\n            var b4 = -0.187379492368184;\n\n            flow.set(\"meu_intervalo_dinamico\", 20);\n\n            setfcF = 20;\n\n            sec = 0;\n        }\n        else {\n            if (fc_novo === 10) { //fc = 10 Hz e TxCC = 40 ms;\n            //coeficientes do filtro Butterworth de quarta ordem com fc = 10 Hz e fs = 200 Hz\n            var a0 = 0.000416599204407;\n            var a1 = 0.001666396817626;\n            var a2 = 0.002499595226440;\n            var a3 = 0.001666396817626;\n            var a4 = 0.000416599204407;\n            var b1 = 3.180638548874720;\n            var b2 = -3.861194348994214;\n            var b3 = 2.112155355110970;\n            var b4 = -0.438265142261980;\n\n            flow.set(\"meu_intervalo_dinamico\", 40);\n\n            setfcF = 10;\n\n            sec = 0;\n            }\n            else{\n                if (fc_novo === 4) { //fc = 4 Hz e TxCC = 100 ms;\n                    //coeficientes do filtro Butterworth de quarta ordem com fc = 4 Hz e fs = 200 Hz\n                    var a0 = 0.0000132937288987530;\n                    var a1 = 0.0000531749155950119;\n                    var a2 = 0.0000797623733925178;\n                    var a3 = 0.0000531749155950119;\n                    var a4 = 0.0000132937288987530;\n                    var b1 = 3.671729089161934;\n                    var b2 = -5.067998386734185;\n                    var b3 = 3.115966925201742;\n                    var b4 = -0.719910327291870;\n\n                    flow.set(\"meu_intervalo_dinamico\", 100);\n\n                    setfcF = 4;\n\n                    sec = 0;\n                }\n                else{\n                    if (fc_novo === 2) { //fc = 2 Hz e TxCC = 200 ms;\n                        //coeficientes do filtro Butterworth de quarta ordem com fc = 2 Hz e fs = 200 Hz\n                        var a0 = 0.00000089848614639706;\n                        var a1 = 0.00000359394458558825;\n                        var a2 = 0.00000539091687838237;\n                        var a3 = 0.00000359394458558825;\n                        var a4 = 0.00000089848614639706;\n                        var b1 = 3.835825540647348;\n                        var b2 = -5.520819136622229;\n                        var b3 = 3.533535219463016;\n                        var b4 = -0.848555999266478;\n\n                        flow.set(\"meu_intervalo_dinamico\", 200);\n\n                        setfcF = 2;\n\n                        sec = 0;\n                    }\n                    else{\n                        if (fc_novo === 1) { //fc = 1 Hz e TxCC = 400 ms;\n                            //coeficientes do filtro Butterworth de quarta ordem com fc = 1 Hz e fs = 200 Hz\n                            var a0 = 0.000000058451424331439;\n                            var a1 = 0.000000233805697325758;\n                            var a2 = 0.000000350708545988636;\n                            var a3 = 0.000000233805697325758;\n                            var a4 = 0.000000058451424331439;\n                            var b1 = 3.917907865391989;\n                            var b2 = -5.757076379118072;\n                            var b3 = 3.760349507694532;\n                            var b4 = -0.921181929191238;\n\n                            flow.set(\"meu_intervalo_dinamico\", 400);\n\n                            setfcF = 1;\n\n                            sec = 0;\n                        }\n                        else{\n                         \n                            flow.set(\"meu_intervalo_dinamico\", 2000);\n\n                            setfcF = 0;\n\n                            sec = 1;\n                        }\n                    }\n                }\n            }\n        }\n\n \n    flow.set('sec', sec);\n  \n   \n    /*\n    //equações da diferença do filtro Butterworth de segunda ordem\n    alphaAout = a0*alphaA + a1*alphaAa + a2*alphaAaa[cont_in_faa-1] + b1*alphaAout + b2*alphaAouta[cont_out_faa-1];\n    alphaBout = a0*alphaB + a1*alphaBa + a2*alphaBaa[cont_in_faa-1] + b1*alphaBout + b2*alphaBouta[cont_out_faa-1];\n    alphaCout = a0*alphaC + a1*alphaCa + a2*alphaCaa[cont_in_faa-1] + b1*alphaCout + b2*alphaCouta[cont_out_faa-1];\n\n    alphaAaa[cont_in_faa-1] = alphaA;\n    alphaBaa[cont_in_faa-1] = alphaB;\n    alphaCaa[cont_in_faa-1] = alphaC;\n\n    alphaAouta[cont_out_faa-1] = alphaAout;\n    alphaBouta[cont_out_faa-1] = alphaBout;\n    alphaCouta[cont_out_faa-1] = alphaCout;\n\n    flow.set('alphaAout', alphaAout);\n    flow.set('alphaBout', alphaBout);\n    flow.set('alphaCout', alphaCout);\n\n    flow.set('alphaAa', alphaA);\n    flow.set('alphaBa', alphaB);\n    flow.set('alphaCa', alphaC);\n\n    flow.set('alphaAaa', alphaAaa);\n    flow.set('alphaBaa', alphaBaa);\n    flow.set('alphaCaa', alphaCaa);\n\n    flow.set('alphaAouta', alphaAouta);\n    flow.set('alphaBouta', alphaBouta);\n    flow.set('alphaCouta', alphaCouta);\n    */\n\n    if (sec === 0) {\n\n        //equações da diferença do filtro filtro Butterworth de quarta ordem\n        alphaAout = a0 * alphaA + a1 * alphaAa + a2 * alphaAaa[cont_in_faa - 1] + a3 * alphaAaaa[cont_in_faaa - 1] + a4 * alphaAaaaa[cont_in_faaaa - 1] + b1 * alphaAout + b2 * alphaAouta[cont_out_faa - 1] + b3 * alphaAoutaa[cont_out_faaa - 1] + b4 * alphaAoutaaa[cont_out_faaaa - 1];\n        alphaBout = a0 * alphaB + a1 * alphaBa + a2 * alphaBaa[cont_in_faa - 1] + a3 * alphaBaaa[cont_in_faaa - 1] + a4 * alphaBaaaa[cont_in_faaaa - 1] + b1 * alphaBout + b2 * alphaBouta[cont_out_faa - 1] + b3 * alphaBoutaa[cont_out_faaa - 1] + b4 * alphaBoutaaa[cont_out_faaaa - 1];\n        alphaCout = a0 * alphaC + a1 * alphaCa + a2 * alphaCaa[cont_in_faa - 1] + a3 * alphaCaaa[cont_in_faaa - 1] + a4 * alphaCaaaa[cont_in_faaaa - 1] + b1 * alphaCout + b2 * alphaCouta[cont_out_faa - 1] + b3 * alphaCoutaa[cont_out_faaa - 1] + b4 * alphaCoutaaa[cont_out_faaaa - 1];\n\n        alphaAaa[cont_in_faa - 1] = alphaA;\n        alphaBaa[cont_in_faa - 1] = alphaB;\n        alphaCaa[cont_in_faa - 1] = alphaC;\n\n        alphaAouta[cont_out_faa - 1] = alphaAout;\n        alphaBouta[cont_out_faa - 1] = alphaBout;\n        alphaCouta[cont_out_faa - 1] = alphaCout;\n\n        alphaAaaa[cont_in_faaa - 1] = alphaA;\n        alphaBaaa[cont_in_faaa - 1] = alphaB;\n        alphaCaaa[cont_in_faaa - 1] = alphaC;\n\n        alphaAoutaa[cont_out_faaa - 1] = alphaAout;\n        alphaBoutaa[cont_out_faaa - 1] = alphaBout;\n        alphaCoutaa[cont_out_faaa - 1] = alphaCout;\n\n        alphaAaaaa[cont_in_faaaa - 1] = alphaA;\n        alphaBaaaa[cont_in_faaaa - 1] = alphaB;\n        alphaCaaaa[cont_in_faaaa - 1] = alphaC;\n\n        alphaAoutaaa[cont_out_faaaa - 1] = alphaAout;\n        alphaBoutaaa[cont_out_faaaa - 1] = alphaBout;\n        alphaCoutaaa[cont_out_faaaa - 1] = alphaCout;\n\n    }\n\n    flow.set('alphaAout', alphaAout);\n    flow.set('alphaBout', alphaBout);\n    flow.set('alphaCout', alphaCout);\n\n    flow.set('alphaAa', alphaA);\n    flow.set('alphaBa', alphaB);\n    flow.set('alphaCa', alphaC);\n\n    flow.set('alphaAaa', alphaAaa);\n    flow.set('alphaBaa', alphaBaa);\n    flow.set('alphaCaa', alphaCaa);\n\n    flow.set('alphaAaaa', alphaAaaa);\n    flow.set('alphaBaaa', alphaBaaa);\n    flow.set('alphaCaaa', alphaCaaa);\n\n    flow.set('alphaAoutaa', alphaAoutaa);\n    flow.set('alphaBoutaa', alphaBoutaa);\n    flow.set('alphaCoutaa', alphaCoutaa);\n\n    flow.set('alphaAaaaa', alphaAaaaa);\n    flow.set('alphaBaaaa', alphaBaaaa);\n    flow.set('alphaCaaaa', alphaCaaaa);\n\n    flow.set('alphaAoutaaa', alphaAoutaaa);\n    flow.set('alphaBoutaaa', alphaBoutaaa);\n    flow.set('alphaCoutaaa', alphaCoutaaa);\n\n  \n    //Algoritmo PBC - potência reativa\n    var QlA = QgridA + (QgA + QgA1);\n    var QlB = QgridB + (QgB + QgB1);\n    var QlC = QgridC + (QgC + QgC1);\n\n    var QbatA = QlA - (Qrefout);\n    var QbatB = QlB - (Qrefout);\n    var QbatC = QlC - (Qrefout);\n\n    if (QbatA > (QmaxoA + QmaxoA1)) {\n        QbatA = (QmaxoA + QmaxoA1);\n    }\n    else if (QbatA < (-1 * (QmaxoA + QmaxoA1))) {\n        QbatA = (-1 * (QmaxoA + QmaxoA1));\n    }\n\n    if (QbatB > (QmaxoB + QmaxoB1)) {\n        QbatB = (QmaxoB + QmaxoB1);\n    }\n    else if (QbatB < (-1*(QmaxoB + QmaxoB1))) {\n        QbatB = (-1*(QmaxoB + QmaxoB1));\n    }\n\n    if (QbatC > (QmaxoC + QmaxoC1)) {\n        QbatC = (QmaxoC + QmaxoC1);\n    }\n    else if (QbatC < (-1*(QmaxoC + QmaxoC1))) {\n        QbatC = (-1*(QmaxoC + QmaxoC1));\n    }\n\n    if(QmaxoA == 0 && QmaxoA1 == 0){\n        var betaA = 0;\n    }\n    else{\n        var betaA = QbatA / (QmaxoA + QmaxoA1);\n    }\n\n    if (QmaxoB == 0 && QmaxoB1 == 0) {\n        var betaB = 0;\n    }\n    else {\n        var betaB = QbatB / (QmaxoB + QmaxoB1);\n    }\n\n    if (QmaxoC == 0 && QmaxoC1 == 0) {\n        var betaC = 0;\n    }\n    else {\n        var betaC = QbatC / (QmaxoC + QmaxoC1);\n    }\n\n    if (sec === 0) {\n\n        //equações da diferença do filtro Butterworth de quarta ordem\n        betaAout = a0 * betaA + a1 * betaAa + a2 * betaAaa[cont_in_faa - 1] + a3 * betaAaaa[cont_in_faaa - 1] + a4 * betaAaaaa[cont_in_faaaa - 1] + b1 * betaAout + b2 * betaAouta[cont_out_faa - 1] + b3 * betaAoutaa[cont_out_faaa - 1] + b4 * betaAoutaaa[cont_out_faaaa - 1];\n        betaBout = a0 * betaB + a1 * betaBa + a2 * betaBaa[cont_in_faa - 1] + a3 * betaBaaa[cont_in_faaa - 1] + a4 * betaBaaaa[cont_in_faaaa - 1] + b1 * betaBout + b2 * betaBouta[cont_out_faa - 1] + b3 * betaBoutaa[cont_out_faaa - 1] + b4 * betaBoutaaa[cont_out_faaaa - 1];\n        betaCout = a0 * betaC + a1 * betaCa + a2 * betaCaa[cont_in_faa - 1] + a3 * betaCaaa[cont_in_faaa - 1] + a4 * betaCaaaa[cont_in_faaaa - 1] + b1 * betaCout + b2 * betaCouta[cont_out_faa - 1] + b3 * betaCoutaa[cont_out_faaa - 1] + b4 * betaCoutaaa[cont_out_faaaa - 1];\n\n        betaAaa[cont_in_faa-1] = betaA;\n        betaBaa[cont_in_faa-1] = betaB;\n        betaCaa[cont_in_faa-1] = betaC;\n\n        betaAouta[cont_out_faa-1] = betaAout;\n        betaBouta[cont_out_faa-1] = betaBout;\n        betaCouta[cont_out_faa-1] = betaCout;\n\n        betaAaaa[cont_in_faaa - 1] = betaA;\n        betaBaaa[cont_in_faaa - 1] = betaB;\n        betaCaaa[cont_in_faaa - 1] = betaC;\n\n        betaAoutaa[cont_out_faaa - 1] = betaAout;\n        betaBoutaa[cont_out_faaa - 1] = betaBout;\n        betaCoutaa[cont_out_faaa - 1] = betaCout;\n\n        betaAaaaa[cont_in_faaaa - 1] = betaA;\n        betaBaaaa[cont_in_faaaa - 1] = betaB;\n        betaCaaaa[cont_in_faaaa - 1] = betaC;\n\n        betaAoutaaa[cont_out_faaaa - 1] = betaAout;\n        betaBoutaaa[cont_out_faaaa - 1] = betaBout;\n        betaCoutaaa[cont_out_faaaa - 1] = betaCout;\n\n    }\n\n    flow.set('betaAout', betaAout);\n    flow.set('betaBout', betaBout);\n    flow.set('betaCout', betaCout);\n\n    flow.set('betaAa', betaA);\n    flow.set('betaBa', betaB);\n    flow.set('betaCa', betaC);\n\n    flow.set('betaAaa', betaAaa);\n    flow.set('betaBaa', betaBaa);\n    flow.set('betaCaa', betaCaa);\n\n    flow.set('betaAouta', betaAouta);\n    flow.set('betaBouta', betaBouta);\n    flow.set('betaCouta', betaCouta);\n\n    flow.set('betaAaaa', betaAaaa);\n    flow.set('betaBaaa', betaBaaa);\n    flow.set('betaCaaa', betaCaaa);\n\n    flow.set('betaAoutaa', betaAoutaa);\n    flow.set('betaBoutaa', betaBoutaa);\n    flow.set('betaCoutaa', betaCoutaa);\n\n    flow.set('betaAaaaa', betaAaaaa);\n    flow.set('betaBaaaa', betaBaaaa);\n    flow.set('betaCaaaa', betaCaaaa);\n\n    flow.set('betaAoutaaa', betaAoutaaa);\n    flow.set('betaBoutaaa', betaBoutaaa);\n    flow.set('betaCoutaaa', betaCoutaaa);\n\n    //Alocar buffer e montar objetos com as respostas\n    var bufA, bufB, bufC, bufD;\n    var msgA, msgB, msgC, msgD;\n\n    contx = contx + 1;\n    cont_in_faa = cont_in_faa + 1;\n    cont_out_faa = cont_out_faa + 1;\n    cont_in_faaa = cont_in_faaa + 1;\n    cont_out_faaa = cont_out_faaa + 1;\n    cont_in_faaaa = cont_in_faaaa + 1;\n    cont_out_faaaa = cont_out_faaaa + 1;\n\n    flow.set('cont_in_faa', cont_in_faa);\n    flow.set('cont_out_faa', cont_out_faa);\n\n    flow.set('cont_in_faaa', cont_in_faaa);\n    flow.set('cont_out_faaa', cont_out_faaa);\n\n    flow.set('cont_in_faaaa', cont_in_faaaa);\n    flow.set('cont_out_faaaa', cont_out_faaaa);\n\n//}\n\nvar info = Prefout+','+PgridA;\n//var info = alphaA+','+alphaAout;\nvar newMsg = { payload: info, filename: arq };\nflow.set('newMsg', newMsg);\n\nflow.set('Prefout', Prefout);\nflow.set('Qrefout', Qrefout);\n\nflow.set('PlA', PlA);\nflow.set('PlB', PlB);\nflow.set('PlC', PlC);\n\nflow.set('QlA', QlA);\nflow.set('QlB', QlB);\nflow.set('QlC', QlC);\n\nflow.set('setfcF', setfcF);\n\n",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2890,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "9201bb0efc7459ef",
+        "type": "file",
+        "z": "01ba8f577a2030ad",
+        "name": "calc_delay",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 2350,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "373df1db2ad736ab",
+        "type": "file",
+        "z": "01ba8f577a2030ad",
+        "name": "Sevice_time",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 2350,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "74658b4a2df2b622",
+        "type": "file",
+        "z": "01ba8f577a2030ad",
+        "name": "delay_SCADA",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 2360,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b3a6ca81342774d5",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "header_PgPref",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 2720,
+        "y": 860,
+        "wires": [
+            [
+                "45445f30fd47d011"
+            ]
+        ]
+    },
+    {
+        "id": "4fa07f9e1f070443",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 3",
+        "func": "var arq = flow.get('arq') || 0;\nvar cont_Hz = flow.get('cont_Hz') || 0;\nvar tamanho = flow.get('tamanho') || 0;\n\nif(cont_Hz < (tamanho - 1)){\n    cont_Hz = cont_Hz + 1;\n    if(cont_Hz < (tamanho - 1)){\n        var info = 'in_faaxHz,out_faaxHz';\n        flow.set('cont_Hz', cont_Hz);\n    }\n    else{\n        var info = 'in_fim,ou_fim';\n    }\n}\n\nflow.set('cont_Hz', cont_Hz);\n\nvar newMsg = { payload: info, filename: arq };\nreturn newMsg\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3040,
+        "y": 860,
+        "wires": [
+            [
+                "f199b65c03216714"
+            ]
+        ]
+    },
+    {
+        "id": "f199b65c03216714",
+        "type": "file",
+        "z": "01ba8f577a2030ad",
+        "name": "PgPref",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 3170,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ea833853ba6b7da8",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "update_PgPref",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 2720,
+        "y": 900,
+        "wires": [
+            [
+                "71237d3f3e868ada"
+            ]
+        ]
+    },
+    {
+        "id": "c66af6978bb9fa2c",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 4",
+        "func": "var cont_Hz = flow.get('cont_Hz') || 0;\nvar tamanho = flow.get('tamanho') || 0;\nvar newMsg = flow.get('newMsg') || 0;\n\nif(cont_Hz === (tamanho - 1)){\n   newMsg = null;\n}\n\nreturn newMsg;\n\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3040,
+        "y": 900,
+        "wires": [
+            [
+                "2bb385970ca45dde"
+            ]
+        ]
+    },
+    {
+        "id": "2bb385970ca45dde",
+        "type": "file",
+        "z": "01ba8f577a2030ad",
+        "name": "PgPref",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 3170,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4c7de8140e0a2c21",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "update_calcdelay",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 2720,
+        "y": 940,
+        "wires": [
+            [
+                "a15ed23eb7335612"
+            ]
+        ]
+    },
+    {
+        "id": "e39db1be9fb8df87",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 5",
+        "func": "var newMsg1 = flow.get('newMsg1') || 0;\nreturn newMsg1;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3040,
+        "y": 940,
+        "wires": [
+            [
+                "bb8ea19528bad07f"
+            ]
+        ]
+    },
+    {
+        "id": "bb8ea19528bad07f",
+        "type": "file",
+        "z": "01ba8f577a2030ad",
+        "name": "calc_delayx",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 3190,
+        "y": 940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "71237d3f3e868ada",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "delay 4ms",
+        "pauseType": "delay",
+        "timeout": "4",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2890,
+        "y": 900,
+        "wires": [
+            [
+                "c66af6978bb9fa2c"
+            ]
+        ]
+    },
+    {
+        "id": "a15ed23eb7335612",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "delay 64ms",
+        "pauseType": "delay",
+        "timeout": "64",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2890,
+        "y": 940,
+        "wires": [
+            [
+                "e39db1be9fb8df87"
+            ]
+        ]
+    },
+    {
+        "id": "45445f30fd47d011",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "delay 24ms",
+        "pauseType": "delay",
+        "timeout": "24",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2890,
+        "y": 860,
+        "wires": [
+            [
+                "4fa07f9e1f070443"
+            ]
+        ]
+    },
+    {
+        "id": "3b68947778880568",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 6",
+        "func": "//Inicializa as variáveis\nvar ipA = flow.get('ipA')||0;\nvar ipB = flow.get('ipB')||0;\nvar ipC = flow.get('ipC')||0;\nvar ipSCADA = flow.get('ipSCADA')||0;\n\nvar ipA1 = flow.get('ipA1')||0;\nvar ipB1 = flow.get('ipB1')||0;\nvar ipC1 = flow.get('ipC1')||0;\n\nvar alphaAout = flow.get('alphaAout')||0 ;\nvar alphaBout = flow.get('alphaBout')||0;\nvar alphaCout = flow.get('alphaCout')||0;\n\nvar betaAout = flow.get('betaAout')||0;\nvar betaBout = flow.get('betaBout')||0;\nvar betaCout = flow.get('betaCout')||0;\n\nvar PgridA = flow.get('PgridA')||1;\nvar PgridB = flow.get('PgridB')||1;\nvar PgridC = flow.get('PgridC')||1;\n\nvar PgridSP = flow.get('Prefout')||1;\nvar QgridSP = flow.get('Qrefout') || 0;\n\nvar medeclock_DER = flow.get('medeclock_DER') || 1;\n\nvar lat_PCC = flow.get('lat_PCC')||1;\n\nvar start_time = flow.get('start_time')||0;\n\nvar media = flow.get('media') || 0;\nvar mediaA1 = flow.get('mediaA1') || 0;\nvar setfcF = flow.get('setfcF') || 0;\n\nvar bufA, bufB, bufC, bufD, bufA1, bufB1, bufC1;\nvar msgA, msgB, msgC, msgD, msgA1, msgB1, msgC1;\n\nlet sec = flow.get('sec') || 0;\n\nvar txcc = flow.get('txcc') || 0;\nvar txij = flow.get('txij') || 0;\n\n//Implementa a lógica do event-triggered na etapa da transmissão\nif (txcc === 1) {\n    flow.set('envia_A', 1);\n    flow.set('envia_A1', 1);\n    flow.set('envia_B', 1);\n    flow.set('envia_B1', 1);\n    flow.set('envia_C', 1);\n    flow.set('envia_C1', 1);\n\n    if(txij === 0){\n        txcc = 0;\n        flow.set('txcc', txcc);\n    }\n}\nelse {\n    flow.set('envia_A', 0);\n    flow.set('envia_A1', 0);\n    flow.set('envia_B', 0);\n    flow.set('envia_B1', 0);\n    flow.set('envia_C', 0);\n    flow.set('envia_C1', 0);\n}\n\nvar envia_A = flow.get('envia_A')||0;\nvar envia_A1 = flow.get('envia_A1')||0;\n\nvar envia_B = flow.get('envia_B') || 0;\nvar envia_B1 = flow.get('envia_B1') || 0;\n\nvar envia_C = flow.get('envia_C') || 0;\nvar envia_C1 = flow.get('envia_C1') || 0;\n\n//Cria os pacotes a serem enviados aos DERs\n    if (ipA === 0) {\n        msgA = null;\n    } else {\n        var E11 = (new Date().getTime()/1000) - start_time;\n        bufA = Buffer.allocUnsafe(48);\n\n        bufA.writeFloatLE(sec, 0);\n        bufA.writeFloatLE(txij, 4);\n        bufA.writeFloatLE(alphaAout, 8);\n        bufA.writeFloatLE(betaAout, 12);\n        bufA.writeFloatLE(E11, 16);\n        bufA.writeFloatLE(medeclock_DER, 20);\n        bufA.writeFloatLE(media, 24);\n        bufA.writeFloatLE(mediaA1, 28);\n        bufA.writeFloatLE(setfcF, 32);\n        bufA.writeFloatLE(QgridSP, 36);\n        bufA.writeFloatLE(PgridSP, 40);\n        bufA.writeFloatLE(lat_PCC, 44);\n    \n        if (envia_A == 0) {\n            msgA = null;\n        }\n        else {\n            msgA = { payload: bufA, ip: ipA };\n        }\n    }\n    if (ipB === 0) {\n        msgB = null;\n    } else {\n        bufB = Buffer.allocUnsafe(8);\n        bufB.writeFloatLE(alphaBout, 0);\n        bufB.writeFloatLE(betaBout, 4);\n        if (envia_B == 0) {\n            msgB = null;\n        }\n        else {\n            msgB = { payload: bufB, ip: ipB };\n        }        \n    }\n    if (ipC === 0) {\n        msgC = null;\n    } else {\n        bufC = Buffer.allocUnsafe(8);\n        bufC.writeFloatLE(alphaCout, 0);\n        bufC.writeFloatLE(betaCout, 4);\n        if (envia_C == 0) {\n            msgC = null;\n        }\n        else {\n            msgC = { payload: bufC, ip: ipC };\n        }         \n    }\n\n    if (ipA1 === 0) {\n        msgA1 = null;\n    } else {\n        var E12 = (new Date().getTime()/1000) - start_time;\n        bufA1 = Buffer.allocUnsafe(12);\n        bufA1.writeFloatLE(alphaAout, 0);\n        bufA1.writeFloatLE(betaAout, 4);\n        bufA1.writeFloatLE(E12, 8);\n        if(envia_A1 == 0){\n            msgA1 = null;\n        }\n        else{\n            msgA1 = { payload: bufA1, ip: ipA1 };\n        }\n    }\n    if (ipB1 === 0) {\n        msgB1 = null;\n    } else {\n        bufB1 = Buffer.allocUnsafe(8);\n        bufB1.writeFloatLE(alphaBout, 0);\n        bufB1.writeFloatLE(betaBout, 4);\n        if (envia_B1 == 0) {\n            msgB1 = null;\n        }\n        else {\n            msgB1 = { payload: bufB1, ip: ipB1 };\n        }        \n    }\n    if (ipC1 === 0) {\n        msgC1 = null;\n    } else {\n        bufC1 = Buffer.allocUnsafe(8);\n        bufC1.writeFloatLE(alphaCout, 0);\n        bufC1.writeFloatLE(betaCout, 4);\n        if (envia_C1 == 0) {\n            msgC1 = null;\n        }\n        else {\n            msgC1 = { payload: bufC1, ip: ipC1 };\n        } \n    }\n\n//Envia os pacotes aos DERs\nreturn [msgA, msgB, msgC, msgA1, msgB1, msgC1];",
+        "outputs": 6,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2620,
+        "y": 1340,
+        "wires": [
+            [
+                "3df4fe99a4df1380"
+            ],
+            [
+                "01eba8f6c5d19306"
+            ],
+            [
+                "bbb4158885e815fe"
+            ],
+            [
+                "ab4fb2661798d6be"
+            ],
+            [
+                "2909ac93ad415e74"
+            ],
+            [
+                "db750b4ee7bad434"
+            ]
+        ]
+    },
+    {
+        "id": "dea3c4d62157b616",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "change ref",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "21600",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 3000,
+        "y": 720,
+        "wires": [
+            [
+                "a3bb1da2a35673c0"
+            ]
+        ]
+    },
+    {
+        "id": "a3bb1da2a35673c0",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 7",
+        "func": "flow.set('Prefset', 0);\nflow.set('Qrefset', 0);",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3160,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "68620e1a0e0548ae",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 8",
+        "func": "flow.set('Prefset', 0);\nflow.set('Qrefset', -2000);",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3160,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "96052189bf698343",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "delay and powers",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 2720,
+        "y": 980,
+        "wires": [
+            [
+                "3ae588c2651a305f"
+            ]
+        ]
+    },
+    {
+        "id": "f7f14fdcebcaab48",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 9",
+        "func": "var arq1 = flow.get('arq1') || 0;\nvar medeclock_SCADA = flow.get('medeclock_SCADA') || 0;\nvar instanteS = flow.get('instanteS') || 0;\n\nvar PgridA = flow.get('PgridA')||1;\nvar PgridB = flow.get('PgridB')||1;\nvar PgridC = flow.get('PgridC')||1;\n\nvar Prefout = flow.get('Prefout')||1;\n\nvar info = instanteS + ',' + medeclock_SCADA + ',' + PgridA + ',' + PgridB + ',' + PgridC + ',' + Prefout;\nvar newMsg = {payload: info, filename: arq1};\nreturn newMsg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 3040,
+        "y": 980,
+        "wires": [
+            [
+                "45ada3114da53f8e"
+            ]
+        ]
+    },
+    {
+        "id": "45ada3114da53f8e",
+        "type": "file",
+        "z": "01ba8f577a2030ad",
+        "name": "powers",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 3180,
+        "y": 980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3ae588c2651a305f",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "delay 2.5ms",
+        "pauseType": "delay",
+        "timeout": "2.5",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2890,
+        "y": 980,
+        "wires": [
+            [
+                "f7f14fdcebcaab48"
+            ]
+        ]
+    },
+    {
+        "id": "da0af65af2185282",
+        "type": "file",
+        "z": "01ba8f577a2030ad",
+        "name": "calc_delayx",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 2350,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7cc2493d3d324490",
+        "type": "file",
+        "z": "01ba8f577a2030ad",
+        "name": "calc_delayx",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 2490,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "35e93bd987810f0d",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 10",
+        "func": "var cont_delay1_i2 = flow.get('cont_delay1_i2') || 0;\nvar valor_delay1_i2 = 0;\n\n/*\nswitch (cont_delay1_i2) {\n    case 1:\n        valor_delay1_i2 = 0;\n\n        break;\n    case 2:\n        valor_delay1_i2 = 0;\n\n        break;\n    case 3:\n        valor_delay1_i2 = 0;\n\n        break;\n    case 4:\n        valor_delay1_i2 = 0;\n\n        break;\n    case 5:\n        valor_delay1_i2 = 0;\n\n        break;\n    case 6:\n        valor_delay1_i2 = 0;\n\n        break;\n    case 7:\n        valor_delay1_i2 = 0;\n\n        break;\n    case 8:\n        valor_delay1_i2 = 0;\n\n        break;\n    case 9:\n        valor_delay1_i2 = 0;\n\n        break;\n    default:\n        valor_delay1_i2 = 0;\n    //   flow.set('Prefset', 2000);\n}\n//valor_delay1_i2 = 0;\n*/\n\n\nswitch (cont_delay1_i2) {\n    case 0:\n        valor_delay1_i2 = 48;\n        break;\n    case 1:\n        valor_delay1_i2 = 200;\n        break;\n    case 2:\n        valor_delay1_i2 = 48;\n        break;\n    case 3:\n        valor_delay1_i2 = 48;\n        break;\n    case 4:\n        valor_delay1_i2 = 300;\n        break;\n    case 5:\n        valor_delay1_i2 = 48;\n        break\n}\n\ncont_delay1_i2 = cont_delay1_i2 + 1;\n\n\nflow.set('cont_delay1_i2', cont_delay1_i2);\nflow.set('delay1_i2', valor_delay1_i2);\n",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2790,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "67f61ef380701270",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "set_Lcom1_i2",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "14400",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "105",
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 2620,
+        "y": 680,
+        "wires": [
+            [
+                "35e93bd987810f0d"
+            ]
+        ]
+    },
+    {
+        "id": "29cb683ac25d6f62",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "Lcom1",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2190,
+        "y": 1100,
+        "wires": [
+            [
+                "95969821066dc5d6"
+            ]
+        ]
+    },
+    {
+        "id": "0e0f96e5e7c5862f",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "Lcom1",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2190,
+        "y": 1140,
+        "wires": [
+            [
+                "00adee59b02fe9b5"
+            ]
+        ]
+    },
+    {
+        "id": "2c8bbbd35b2be6d8",
+        "type": "file",
+        "z": "01ba8f577a2030ad",
+        "name": "calc_delayx",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 2490,
+        "y": 1180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "88eea9ed125c10ab",
+        "type": "file",
+        "z": "01ba8f577a2030ad",
+        "name": "calc_delayx",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 2350,
+        "y": 780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7bdcb5ca941d6440",
+        "type": "udp out",
+        "z": "01ba8f577a2030ad",
+        "name": "",
+        "addr": "",
+        "iface": "",
+        "port": "30003",
+        "ipv": "udp4",
+        "outport": "30003",
+        "base64": false,
+        "multicast": "false",
+        "x": 3110,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "4e0b424a550da281",
+        "type": "udp out",
+        "z": "01ba8f577a2030ad",
+        "name": "",
+        "addr": "",
+        "iface": "",
+        "port": "30004",
+        "ipv": "udp4",
+        "outport": "30004",
+        "base64": false,
+        "multicast": "false",
+        "x": 3110,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "d9245f949abedde0",
+        "type": "udp out",
+        "z": "01ba8f577a2030ad",
+        "name": "",
+        "addr": "",
+        "iface": "",
+        "port": "30005",
+        "ipv": "udp4",
+        "outport": "30005",
+        "base64": false,
+        "multicast": "false",
+        "x": 3110,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "5bdcb24e9ffde811",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "Lcom",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2970,
+        "y": 1440,
+        "wires": [
+            [
+                "d9245f949abedde0"
+            ]
+        ]
+    },
+    {
+        "id": "325291abbff836d9",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "Lcom",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2970,
+        "y": 1400,
+        "wires": [
+            [
+                "4e0b424a550da281"
+            ]
+        ]
+    },
+    {
+        "id": "81ff535659c95fcc",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "Lcom",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2970,
+        "y": 1360,
+        "wires": [
+            [
+                "7bdcb5ca941d6440"
+            ]
+        ]
+    },
+    {
+        "id": "ab4fb2661798d6be",
+        "type": "change",
+        "z": "01ba8f577a2030ad",
+        "name": "define delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "delay1_i2",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2830,
+        "y": 1360,
+        "wires": [
+            [
+                "81ff535659c95fcc"
+            ]
+        ]
+    },
+    {
+        "id": "2909ac93ad415e74",
+        "type": "change",
+        "z": "01ba8f577a2030ad",
+        "name": "define delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "delay1_i2",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2830,
+        "y": 1400,
+        "wires": [
+            [
+                "325291abbff836d9"
+            ]
+        ]
+    },
+    {
+        "id": "db750b4ee7bad434",
+        "type": "change",
+        "z": "01ba8f577a2030ad",
+        "name": "define delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "delay1_i2",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2830,
+        "y": 1440,
+        "wires": [
+            [
+                "5bdcb24e9ffde811"
+            ]
+        ]
+    },
+    {
+        "id": "b636ab26e531daa2",
+        "type": "delay",
+        "z": "01ba8f577a2030ad",
+        "name": "Lcom",
+        "pauseType": "delayv",
+        "timeout": "0",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 2190,
+        "y": 1180,
+        "wires": [
+            [
+                "e895cb726057f84e"
+            ]
+        ]
+    },
+    {
+        "id": "589717c6152e0ca5",
+        "type": "change",
+        "z": "01ba8f577a2030ad",
+        "name": "define delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "delay2_i2",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2050,
+        "y": 1180,
+        "wires": [
+            [
+                "b636ab26e531daa2"
+            ]
+        ]
+    },
+    {
+        "id": "2c4e00aa81b914d4",
+        "type": "file",
+        "z": "01ba8f577a2030ad",
+        "name": "teste_buffer",
+        "filename": "filename",
+        "filenameType": "msg",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 2350,
+        "y": 820,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dc0bae78345d1f75",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 11",
+        "func": "// Função auxiliar para envio e re-agendamento\nfunction iniciarLoop() {\n    // Obtém o intervalo atual de uma variável de fluxo\n    let intervalo = flow.get(\"meu_intervalo_dinamico\") || 1000;\n \n    // Cria nova mensagem\n    let novaMsg = {\n        payload: \"Executar envio\",\n        intervalo: intervalo\n    };\n\n    // Envia para os próximos nós\n    node.send(novaMsg);\n\n    // Agenda a próxima execução com o intervalo atual\n    setTimeout(iniciarLoop, intervalo);\n}\n\n// Executa apenas na primeira vez após o deploy\nif (!context.get(\"iniciado\")) {\n    context.set(\"iniciado\", true);  // Marca como iniciado\n    iniciarLoop();                  // Começa o ciclo\n}\n\nreturn null;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2470,
+        "y": 1340,
+        "wires": [
+            [
+                "3b68947778880568"
+            ]
+        ]
+    },
+    {
+        "id": "a4ad05a2a85d46df",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "100us",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.0001",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 2310,
+        "y": 1340,
+        "wires": [
+            [
+                "dc0bae78345d1f75"
+            ]
+        ]
+    },
+    {
+        "id": "8fb3dcc0686cf2bd",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "restore ref",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "64800",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 3000,
+        "y": 760,
+        "wires": [
+            [
+                "68620e1a0e0548ae"
+            ]
+        ]
+    },
+    {
+        "id": "4c70b1502d57118e",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "enviaA1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "120",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1940,
+        "y": 1340,
+        "wires": [
+            [
+                "94321d81894ad965"
+            ]
+        ]
+    },
+    {
+        "id": "94321d81894ad965",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 12",
+        "func": "flow.set('envia_A1', 1);",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2090,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "e5bc9d99671ba17d",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "paraA1",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "60",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1950,
+        "y": 1380,
+        "wires": [
+            [
+                "770d6b7e4d293a5e"
+            ]
+        ]
+    },
+    {
+        "id": "770d6b7e4d293a5e",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 13",
+        "func": "flow.set('envia_A1', 0);",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2090,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "0389c457c8629e8d",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "enviaA",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "90",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1950,
+        "y": 1260,
+        "wires": [
+            [
+                "4acd16f519524002"
+            ]
+        ]
+    },
+    {
+        "id": "4acd16f519524002",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 14",
+        "func": "flow.set('envia_A', 1);",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2090,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "ad53bc25cef951fa",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "paraA",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "30",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1950,
+        "y": 1300,
+        "wires": [
+            [
+                "95448e78b71de667"
+            ]
+        ]
+    },
+    {
+        "id": "95448e78b71de667",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 15",
+        "func": "flow.set('envia_A', 0);",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2090,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "41efd0086e2b84a4",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "enviaA1A2",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "180",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1940,
+        "y": 1420,
+        "wires": [
+            [
+                "0a9014c0d2865a71"
+            ]
+        ]
+    },
+    {
+        "id": "0a9014c0d2865a71",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 16",
+        "func": "flow.set('envia_A', 1);\nflow.set('envia_A1', 1);",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2090,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "7bb86f3fe5cab64e",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "paraA1A2",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "150",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1940,
+        "y": 1460,
+        "wires": [
+            [
+                "6d593de7add7990a"
+            ]
+        ]
+    },
+    {
+        "id": "6d593de7add7990a",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 17",
+        "func": "flow.set('envia_A', 0);\nflow.set('envia_A1', 0);",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2090,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "b0ca8b3e9ca95caf",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 18",
+        "func": "var cont_delay2_i1 = flow.get('cont_delay2_i1') || 0;\nvar valor_delay2_i1 = 0;\n\n/*\nswitch (cont_delay2_i1) {\n    case 1:\n        valor_delay2_i1 = 2*8;\n      \n        break;\n    case 2:\n        valor_delay2_i1 = 2*65;\n    \n        break;\n    case 3:\n        valor_delay2_i1 = 2*100;\n    \n        break;\n    case 4:\n        valor_delay2_i1 = 2*200;\n    \n        break;\n    case 5:\n        valor_delay2_i1 = 2*350;\n    \n        break;\n    case 6:\n        valor_delay2_i1 = 2*36;\n   \n        break;\n    case 7:\n        valor_delay2_i1 = 0;\n\n        break;\n    case 8:\n        valor_delay2_i1 = 2*320;\n\n        break;\n    case 9:\n        valor_delay2_i1 = 0;\n\n        break;\n    default:\n        valor_delay2_i1 = 0;\n     //   flow.set('Prefset', 2000);\n}\n//valor_delay2_i1 = 0;\n//valor_delay = 0;\n*/\n\n\nswitch (cont_delay2_i1) {\n    case 0:\n        valor_delay2_i1 = 48;\n        break;\n    case 1:\n        valor_delay2_i1 = 200;\n        break;\n    case 2:\n        valor_delay2_i1 = 48;\n        break;\n    case 3:\n        valor_delay2_i1 = 48;\n        break;\n    case 4:\n        valor_delay2_i1 = 300;\n        break;\n    case 5:\n        valor_delay2_i1 = 48;\n        break\n}\n\n\n//valor_delay = 0;\n\ncont_delay2_i1 = cont_delay2_i1 + 1;\n\nflow.set('cont_delay2_i1', cont_delay2_i1);\nflow.set('delay2_i1', valor_delay2_i1);\n\n\nmsg.payload = valor_delay2_i1;\nreturn msg;\n",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2790,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "1e5a711d45a85ca0",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "set_Lcom2_i1",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "14400",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "105",
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 2620,
+        "y": 720,
+        "wires": [
+            [
+                "b0ca8b3e9ca95caf"
+            ]
+        ]
+    },
+    {
+        "id": "c7454416ff0af86c",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "function 19",
+        "func": "var cont_delay2_i2 = flow.get('cont_delay2_i2') || 0;\nvar valor_delay2_i2 = 0;\n\n/*\nswitch (cont_delay2_i2) {\n    case 1:\n        valor_delay2_i2 = 2*8;\n\n        break;\n    case 2:\n        valor_delay2_i2 = 2*65;\n\n        break;\n    case 3:\n        valor_delay2_i2 = 2*100;\n\n        break;\n    case 4:\n        valor_delay2_i2 = 2*200;\n\n        break;\n    case 5:\n        valor_delay2_i2 = 2*350;\n\n        break;\n    case 6:\n        valor_delay2_i2 = 2*36;\n\n        break;\n    case 7:\n        valor_delay2_i2 = 0;\n\n        break;\n    case 8:\n        valor_delay2_i2 = 2*320;\n\n        break;\n    case 9:\n        valor_delay2_i2 = 0;\n\n        break;\n    default:\n        valor_delay2_i2 = 0;\n    //   flow.set('Prefset', 2000);\n}\n//valor_delay2_i2 = 0;\n*/\n\n\nswitch (cont_delay2_i2) {\n    case 0:\n        valor_delay2_i2 = 48;\n        break;\n    case 1:\n        valor_delay2_i2 = 200;\n        break;\n    case 2:\n        valor_delay2_i2 = 48;\n        break;\n    case 3:\n        valor_delay2_i2 = 48;\n        break;\n    case 4:\n        valor_delay2_i2 = 300;\n        break;\n    case 5:\n        valor_delay2_i2 = 48;\n        break\n}\n\ncont_delay2_i2 = cont_delay2_i2 + 1;\n\nflow.set('cont_delay2_i2', cont_delay2_i2);\nflow.set('delay2_i2', valor_delay2_i2);\n",
+        "outputs": 0,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2790,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "d42dc21572fd5fb8",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "set_Lcom2_i2",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "14400",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "105",
+        "topic": "",
+        "payload": "iso",
+        "payloadType": "date",
+        "x": 2620,
+        "y": 760,
+        "wires": [
+            [
+                "c7454416ff0af86c"
+            ]
+        ]
+    },
+    {
+        "id": "5ad2f1d9e7f3024f",
+        "type": "inject",
+        "z": "01ba8f577a2030ad",
+        "name": "cada 1/60 s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "0.001667",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 2710,
+        "y": 1140,
+        "wires": [
+            [
+                "9cd5416b6ce66804"
+            ]
+        ]
+    },
+    {
+        "id": "9cd5416b6ce66804",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "MAF",
+        "func": "//Inicializa as variáveis\nvar lat_set_fcc = flow.get('lat_set_fcc') || 0;\nvar lat_set_fcc_A1 = flow.get('lat_set_fcc_A1') || 0;\n\n//media móvel com janela de 0,5 s (300 amostras x 1/60 s) para lat_set_fcc (L11)\nconst N = 300;\nlet buffer = context.get('buffer') || [];\n\n//adiciona nova amostra no buffer\nbuffer.push(Number(lat_set_fcc));\n\n//descarta a mais antiga depois de cheio\nif (buffer.length > N) {\n    buffer.shift();\n}\n\ncontext.set('buffer', buffer);\n\n//cálculo da média das últimas 300 amostras\nlet soma = buffer.reduce((a, b) => a + b, 0);\nlet media = soma / buffer.length;\n\nflow.set('media', media);\n\n//media móvel com janela de 0,5 s para lat_set_fcc_A1 (L12)\nconst NA1 = 300;\n\nlet bufferA1 = context.get('bufferA1') || [];\n\nbufferA1.push(Number(lat_set_fcc_A1));\n\nif (bufferA1.length > NA1) {\n    bufferA1.shift();\n}\n\ncontext.set('bufferA1', bufferA1);\n\nlet somaA1 = bufferA1.reduce((a, b) => a + b, 0);\nlet mediaA1 = somaA1 / bufferA1.length;\n\nflow.set('mediaA1', mediaA1);",
+        "outputs": 0,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2850,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "95969821066dc5d6",
+        "type": "function",
+        "z": "01ba8f577a2030ad",
+        "name": "RX - DER C1",
+        "func": "//Ler dados recebidos e alocar no buffer\nvar buf = Buffer.from(msg.payload);\n\n//Ler variáveis recebidas\nflow.set('PgC1', buf.readFloatLE(0));\nflow.set('QgC1', buf.readFloatLE(4));\nflow.set('PmaxoC1', buf.readFloatLE(8));\nflow.set('QmaxoC1', buf.readFloatLE(12));\nflow.set('ipC1', msg.ip);\n\n\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2330,
+        "y": 1100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6f72414e639b8dea",
+        "type": "change",
+        "z": "01ba8f577a2030ad",
+        "name": "define delay",
+        "rules": [
+            {
+                "t": "set",
+                "p": "delay",
+                "pt": "msg",
+                "to": "delay2_i1",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2050,
+        "y": 1020,
+        "wires": [
+            [
+                "6be8b54e4cf46232"
+            ]
+        ]
+    }
+]
